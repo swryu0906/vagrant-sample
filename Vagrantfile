@@ -60,6 +60,13 @@ Vagrant.configure("2") do |config|
       node_config.vm.provision :shell, inline: $etchosts
       node_config.vm.provision :shell, path: "bootstrap.sh"
 
+      if node[:host] == "dev2"
+        node_config.vm.synced_folder "repository", "/repository",
+          id: "repository",
+          owner: "vagrant",
+          group: "vagrant"
+      end
+
     end
 
   end
